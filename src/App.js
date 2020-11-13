@@ -5,7 +5,7 @@ import { initialAppState , appReducer } from './reducers/appReducer'
 import './App.css';
 
 function App() {
-  const [state, dispatch] = useReducer(appReducer, initialAppState)
+  const [orgTodoList, dispatch] = useReducer(appReducer, initialAppState)
   // const [todos, setTodos] = useState([
   //   {
   //     text: "Learn about React",
@@ -40,23 +40,18 @@ function App() {
 
   const removeTodo = id => {
     dispatch({
-      type: "REMOVE_TODOS",
+      type: "REMOVE_TASK",
       payload: id
     })
-
-
-    // const newTodos = [...state.todos];
-    // newTodos.splice(index, 1);
-    // setTodos(newTodos);
   };
 
   return (
      <div className="app">
       <div className="todo-list">
-        {state.todo.map((todo) => (
+        {orgTodoList.todoList.map((todo) => (
           <Todo
             key={todo.id}
-            index={todo.id}
+            id={todo.id}
             todo={todo}
             completeTodo={completeTodo}
             removeTodo={removeTodo}

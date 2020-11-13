@@ -1,5 +1,5 @@
 export const initialAppState = {
-  todo: [
+  todoList: [
     {
       text: "Learn about React",
       isCompleted: false,
@@ -28,29 +28,29 @@ export const appReducer = (state, action) => {
       };
       return {
         ...state,
-        todo: [...state.todo, newTodos],
+        todoList: [...state.todoList, newTodos],
       };
     case "COMP_TODOS":
-      const compTodos = state.todo.map((todos) => {
-        if (todos.id === action.payload) {
+      const compTodos = state.todoList.map((task) => {
+        if (task.id === action.payload) {
           return {
-            ...todos,
-            isCompleted: !todos.isCompleted,
+            ...task,
+            isCompleted: !task.isCompleted,
           };
         }
-        return todos;
+        return task;
       });
       return {
         ...state,
-        todo: compTodos
+        todoList: compTodos
       }
-      case "REMOVE_TODOS" :
-        const removeTodos = state.todo.filter((todos) => {
-          return todos.id !== action.payload
+      case "REMOVE_TASK" :
+        const newTodoListWithoutRemovedTask = state.todoList.filter((task) => {
+          return task.id !== action.payload
         })
         return {
           ...state,
-          todo: removeTodos
+          todoList: newTodoListWithoutRemovedTask
         }
     default:
       return state;
